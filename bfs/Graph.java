@@ -112,6 +112,7 @@ public class Graph {
 
 		graph.addNode(6, 6, 5);
 //		graph.print(graph);
+		// so that we can print disconnect graph
 		boolean[] isVisited = new boolean[graph.getSize(graph)];
 		for (int i = 0; i < isVisited.length; i++) {
 			if (!isVisited[i]) {
