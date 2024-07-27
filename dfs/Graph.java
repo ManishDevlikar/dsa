@@ -99,6 +99,22 @@ public class Graph {
 		}
 	}
 
+	public static void printAllPath(Graph g, int curr, boolean[] isVisited, String path, int target) {
+		if (curr == target) {
+			System.out.println(path);
+			return;
+		}
+
+		for (int i = 0; i < g.graph[curr].size(); i++) {
+			Edge edge = g.graph[curr].get(i);
+			if (!isVisited[edge.destination]) {
+				isVisited[curr] = true;
+				printAllPath(g, edge.destination, isVisited, path + edge.destination, target);
+				isVisited[curr] = false;
+			}
+		}
+	}
+
 	public static void main(String[] args) {
 		Graph graph = new Graph(7);
 		graph.addNode(0, 0, 1);
@@ -126,10 +142,12 @@ public class Graph {
 		// so that we can print disconnect graph
 		boolean[] isVisited = new boolean[graph.getSize(graph)];
 
-		for (int i = 0; i < isVisited.length; i++) {
-			if (!isVisited[i]) {
-				graph.dfs(graph, i, isVisited);
-			}
-		}
+//		for (int i = 0; i < isVisited.length; i++) {
+//			if (!isVisited[i]) {
+//				graph.dfs(graph, i, isVisited);
+//			}
+//		}
+
+		printAllPath(graph, 0, isVisited, "0", 5);
 	}
 }
