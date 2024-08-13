@@ -73,7 +73,7 @@ public class Graph {
 			if (isVis[edge.destination]) {
 				return true;
 			} else {
-				if (isCycle(g, rec, isVis, edge.destination)) {
+				if (!isVis[edge.destination] && isCycle(g, rec, isVis, edge.destination)) {
 					return true;
 				}
 			}
@@ -108,7 +108,18 @@ public class Graph {
 
 		graph.addNode(6, 6, 5);
 
-		System.out.println(isCycle(graph, new boolean[graph.getSize(graph)], new boolean[graph.getSize(graph)], 0));
+		boolean[] rec = new boolean[graph.getSize(graph)];
+		boolean[] isVis = new boolean[graph.getSize(graph)];
+
+		for (int i = 0; i < graph.getSize(graph); i++) {
+			if (!isVis[i]) {
+				boolean cycle = isCycle(graph, isVis, rec, 0);
+				if (cycle) {
+					System.out.println(cycle);
+					break;
+				}
+			}
+		}
 
 	}
 }
